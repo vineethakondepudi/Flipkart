@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-creds' // Jenkins credential ID
-        IMAGE_NAME = 'vineethakondepudi/flipkart' // Change to your Docker Hub repo
+        IMAGE_NAME = 'vineethakondepudi/flipkart' // Your Docker Hub repo
         IMAGE_TAG = 'latest'
     }
 
@@ -38,19 +38,21 @@ pipeline {
                 }
             }
         }
-    }
-stage('Run Docker Container') {
-    steps {
-        sh """
-        # Stop existing container if running
-        docker stop flipkart-container || true
-        docker rm flipkart-container || true
 
-        # Run new container
-        docker run -d --name flipkart-container -p 3000:3000 ${IMAGE_NAME}:${IMAGE_TAG}
-        """
+        stage('Run Docker Container') {
+            steps {
+                sh """
+                # Stop existing container if running
+                docker stop flipkart-container || true
+                docker rm flipkart-container || true
+
+                # Run new container
+                docker run -d --name flipkart-container -p 3000:3000 ${IMAGE_NAME}:${IMAGE_TAG}
+                """
+            }
+        }
     }
-}
+
     post {
         always {
             sh 'docker logout'
