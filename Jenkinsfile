@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS = 'dockerhub-creds' // Jenkins credential ID
-        IMAGE_NAME = 'yourdockerhubusername/flipkart' // Change to your Docker Hub repo
+        IMAGE_NAME = 'vineethakondepudi/flipkart' // Change to your Docker Hub repo
         IMAGE_TAG = 'latest'
     }
 
