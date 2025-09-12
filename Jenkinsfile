@@ -39,7 +39,18 @@ pipeline {
             }
         }
     }
+stage('Run Docker Container') {
+    steps {
+        sh """
+        # Stop existing container if running
+        docker stop flipkart-container || true
+        docker rm flipkart-container || true
 
+        # Run new container
+        docker run -d --name flipkart-container -p 3000:3000 ${IMAGE_NAME}:${IMAGE_TAG}
+        """
+    }
+}
     post {
         always {
             sh 'docker logout'
