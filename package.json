@@ -2,9 +2,9 @@
   "name": "flipkart_clone",
   "version": "1.0.0",
   "description": "Flipkart Clone",
-  "main": "index.js",
+  "main": "server_backend/index.js",
   "scripts": {
-  "start": "node index.js",
+  "start": "node server_backend/index.js",
   "build": "echo 'No build step defined yet'",
   "test": "echo \"Error: no test specified\" && exit 1"
 }
