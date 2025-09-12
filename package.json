@@ -4,11 +4,10 @@
   "description": "Flipkart Clone",
   "main": "server_backend/index.js",
   "scripts": {
-  "start": "node server_backend/index.js",
-  "build": "echo 'No build step defined yet'",
-  "test": "echo \"Error: no test specified\" && exit 1"
-}
-,
+    "start": "node server_backend/index.js",
+    "build": "echo 'No build step defined yet'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arghadipmanna101/Flipkart_Clone.git"
