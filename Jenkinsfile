@@ -11,14 +11,14 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 dir('frontend') {
-            sh 'npm install'
-        }
+                    sh 'npm install'
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t vineethakondepudi/flipkart:latest -f Dockerfile .'
+                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f Dockerfile ."
             }
         }
 
@@ -30,19 +30,21 @@ pipeline {
                 }
             }
         }
-stage('Run Docker Container') {
-    steps {
-        sh """
-        docker stop flipkart-container || true
-        docker rm flipkart-container || true
-        docker run -d --name flipkart-container -p 3000:80 ${IMAGE_NAME}:${IMAGE_TAG}
-        """
-    }
-}
+
+        stage('Run Docker Container') {
+            steps {
+                sh """
+                docker stop flipkart-container || true
+                docker rm flipkart-container || true
+                docker run -d --name flipkart-container -p 3000:80 ${IMAGE_NAME}:${IMAGE_TAG}
+                """
+            }
+        }
+    }  // <-- closes stages
+
     post {
         always {
             sh 'docker logout'
         }
     }
 }
-
