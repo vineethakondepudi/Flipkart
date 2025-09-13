@@ -31,17 +31,20 @@ pipeline {
             }
         }
 
-      stage('Run Container') {
-    steps {
-        script {
-            sh """
-              docker stop resturent || true
-              docker rm resturent || true
-              docker run -d -p 8091:80 --name resturent ${IMAGE_NAME}:${IMAGE_TAG}
-            """
+    stage('Run Docker Container') {
+            steps {
+                sh """
+                # Stop existing container if running
+                docker stop flipkart-container || true
+                docker rm flipkart-container || true
+
+                # Run new container
+                docker run -d --name flipkart-container -p 3000:3000 ${IMAGE_NAME}:${IMAGE_TAG}
+                """
+            }
         }
     }
-}
+
 
 
     post {
