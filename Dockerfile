@@ -1,20 +1,24 @@
-FROM node:18
+# Stage 1: Build React app
+FROM node:18 AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy only frontend package.json and package-lock.json
-COPY frontend/package*.json ./
-
 # Install dependencies
+COPY frontend/package*.json ./
 RUN npm install
 
-# Copy frontend source code
+# Copy source and build
 COPY frontend/ ./
+RUN npm run build
+
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+
+# Copy build output to Nginx HTML folder
+COPY --from=build /app/build /usr/share/nginx/html
 
 # Expose port
-EXPOSE 3000
+EXPOSE 80
 
-# Start app
-CMD ["npm", "start"]
-
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
