@@ -8,10 +8,11 @@ pipeline {
     }
 
     stages {
-        stage('Install Dependencies') {
+        stage('Build React App') {
             steps {
                 dir('frontend') {
                     sh 'npm install'
+                    sh 'npm run build'
                 }
             }
         }
