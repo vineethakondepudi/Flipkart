@@ -28,7 +28,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f frontend/Dockerfile frontend"
+                sh 'docker build -t vineethakondepudi/flipkart:latest -f Dockerfile .'
             }
         }
 
